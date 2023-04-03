@@ -114,8 +114,8 @@ namespace EPLAN.Model
 				{
 					var Rx = radii[x];
 
-					// combine all existing circles and create twins
-					var combis = Extensions.Combinations(circles, 2);
+					// combine circles as pairs
+					var combis = circles.Combinations(2);
 					foreach (var c in combis)
 					{
 						bool wasAdded = false;
@@ -228,9 +228,8 @@ namespace EPLAN.Model
 		/// <returns>Enclosing circle</returns>
 		private Circle CreateEnclosingCircle(List<Circle> inners)
 		{
-			var centers = inners.Select(i => i.Center).ToList();
-			// var perms = Extensions.GetPermutations(inners.ToArray(), 2).ToList();
-			var perms = Extensions.Combinations(inners, 2).ToList();
+			// combine circles as pairs
+			var combis = inners.Combinations(2).ToList();
 
 			var longest = double.MinValue;
 			var farther1 = new Point();
@@ -238,7 +237,7 @@ namespace EPLAN.Model
 			Circle longestCirc1 = null;
 			Circle longestCirc2 = null;
 
-			foreach (var p in perms)
+			foreach (var p in combis)
 			{
 				var pc = p.ToList();
 
