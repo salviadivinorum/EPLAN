@@ -42,8 +42,7 @@ namespace EPLAN.Model
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="collection"></param>
-		/// <returns></returns>
-		public static IEnumerable<IEnumerable<T>> GetPermutationsC<T>(this IEnumerable<T> collection)
+		public static IEnumerable<IEnumerable<T>> GetPermutations<T>(this IEnumerable<T> collection)
 		{
 			var list = collection.ToList();
 			List<List<T>> permutations = new List<List<T>>();
@@ -51,8 +50,7 @@ namespace EPLAN.Model
 			return permutations;
 		}
 
-		private static void GetPermutations<T>(List<T> collection, int startIndex,
-											   List<List<T>> permutations)
+		private static void GetPermutations<T>(List<T> collection, int startIndex, List<List<T>> permutations)
 		{
 			if (startIndex == collection.Count - 1)
 			{

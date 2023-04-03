@@ -173,7 +173,7 @@ namespace EPLAN.ViewModel
 			await Task.Run(() =>
 			{
 				// find possible permutation between the circles (cables)
-				var permutations = cablesD.GetPermutationsC().ToArray();
+				var permutations = cablesD.GetPermutations().ToArray();
 
 				var minShape = model.CalculateBundles(permutations);
 				model.WireBundle.Circles = minShape?.Result;
