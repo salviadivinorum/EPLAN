@@ -73,9 +73,9 @@ namespace EPLAN.Model
 					(List<Circle> circles, double bundleRadius) result = CalculateBundle(p);
 					if (result != default)
 					{
-						// lock min radius check / change
 						lock (locker)
 						{
+							// critical section
 							if (result.bundleRadius < minRadius)
 							{
 								minShape = result.circles;
@@ -89,7 +89,6 @@ namespace EPLAN.Model
 			return minShape;
 		}
 
-
 		/// <summary>
 		/// Caulculate one possible bundle of circles from given radii permutation
 		/// </summary>
@@ -99,7 +98,7 @@ namespace EPLAN.Model
 		{
 			var radii = p.ToList();
 			var count = p.Count();
-			if(count <= 0) return default;
+			if(count <= 1) return default;
 
 			// the first 2 circle (radii) are taken as the start
 			var R1 = radii[0];

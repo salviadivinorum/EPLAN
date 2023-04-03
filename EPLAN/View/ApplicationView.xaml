@@ -25,6 +25,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -90,16 +91,30 @@
             Command="{Binding Path=UpdateCommand}"
             Content="Update bundle" />
 
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="45,0,0,0"
+            HorizontalAlignment="Left"
+            Content="Bundle diameter (mm):" />
+        
         <TextBlock
             Grid.Row="3"
             Grid.Column="1"
-            Margin="0,8,0,0"
             HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="{Binding BundleDiameter, StringFormat=N2}" />
+
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
             Text="{Binding Status}" />
 
         <Canvas
             x:Name="myCanavs"
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.Column="0"
             Width="1"
             Height="1"

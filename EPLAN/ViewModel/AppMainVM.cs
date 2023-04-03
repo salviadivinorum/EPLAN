@@ -32,7 +32,6 @@ namespace EPLAN.ViewModel
 			model.CablesDiameters = string.Join(" ", lines);
 		}
 
-
 		/// <summary>
 		///  Inner cables in bundle represented as a text
 		/// </summary>
@@ -65,6 +64,20 @@ namespace EPLAN.ViewModel
 			}
 		}
 
+		private double bundleDiameter;
+		public double BundleDiameter
+		{
+			get { return bundleDiameter; }
+			set
+			{
+				if (bundleDiameter != value)
+				{
+					bundleDiameter = value;
+					OnPropertyChange(nameof(BundleDiameter));
+				}
+			}
+		}
+
 		/// <summary>
 		/// UI representation (Ellipses) of Cable wires bundled in 1 cable
 		/// </summary>
@@ -76,6 +89,7 @@ namespace EPLAN.ViewModel
 				{
 					var biggest = shapes.MaxBy(s => s.Data.Bounds.Width);
 					var tl = biggest.Data.Bounds.TopLeft;
+					BundleDiameter = biggest.Data.Bounds.Width / Scale;
 					var vec = new Point() - tl;
 					foreach (var s in shapes)
 					{
@@ -94,7 +108,6 @@ namespace EPLAN.ViewModel
 				}
 			}
 		}
-
 
 		/// <summary>
 		/// ICommand connected to UI to perform calculation
@@ -160,9 +173,10 @@ namespace EPLAN.ViewModel
 			await Task.Run(() =>
 			{
 				// find possible permutation between the circles (cables)
-				var permutations = Extensions.Permute(cablesD, cablesD.Length - 1).ToArray();
+				var permutations = cablesD.GetPermutationsC().ToArray();
+
 				var minShape = model.CalculateBundles(permutations);
-				model.WireBundle.Circles = minShape.Result;
+				model.WireBundle.Circles = minShape?.Result;
 			});
 
 			ItemsToShowInCanvas = model.GetCirclesAsPaths();
