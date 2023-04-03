@@ -98,7 +98,7 @@ namespace EPLAN.Model
 		{
 			var radii = p.ToList();
 			var count = p.Count();
-			if(count <= 1) return default;
+			if (count <= 1) return default;
 
 			// the first 2 circle (radii) are taken as the start
 			var R1 = radii[0];

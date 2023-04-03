@@ -97,7 +97,7 @@
             Margin="45,0,0,0"
             HorizontalAlignment="Left"
             Content="Bundle diameter (mm):" />
-        
+
         <TextBlock
             Grid.Row="3"
             Grid.Column="1"

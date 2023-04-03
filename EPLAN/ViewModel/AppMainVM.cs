@@ -23,6 +23,7 @@ namespace EPLAN.ViewModel
 		private double scale;
 		private string status;
 		private ICommand updater;
+		private double bundleDiameter;
 
 		public AppMainVM()
 		{
@@ -49,7 +50,7 @@ namespace EPLAN.ViewModel
 		}
 
 		/// <summary>
-		/// Scale of circle for UI puprose
+		/// Scale of all circles (for UI puprose)
 		/// </summary>
 		public double Scale
 		{
@@ -64,7 +65,9 @@ namespace EPLAN.ViewModel
 			}
 		}
 
-		private double bundleDiameter;
+		/// <summary>
+		/// Diameter of cable bundle
+		/// </summary>
 		public double BundleDiameter
 		{
 			get { return bundleDiameter; }
