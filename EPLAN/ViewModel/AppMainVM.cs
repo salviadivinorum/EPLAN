@@ -30,21 +30,21 @@ namespace EPLAN.ViewModel
 			model = new AppMainModel();
 			scale = 10;
 			var lines = model.ReadCablesFromFile();
-			model.CablesDiameters = string.Join(" ", lines);
+			model.CablesRadii = string.Join(" ", lines);
 		}
 
 		/// <summary>
-		///  Inner cables in bundle represented as a text
+		///  Inner cables radii in the bundle represented as a text
 		/// </summary>
-		public string CablesDiameters
+		public string CablesRadii
 		{
-			get { return model.CablesDiameters; }
+			get { return model.CablesRadii; }
 			set
 			{
-				if (model.CablesDiameters != value)
+				if (model.CablesRadii != value)
 				{
-					model.CablesDiameters = value;
-					OnPropertyChange(nameof(CablesDiameters));
+					model.CablesRadii = value;
+					OnPropertyChange(nameof(CablesRadii));
 				}
 			}
 		}
@@ -137,7 +137,7 @@ namespace EPLAN.ViewModel
 		/// <returns>true if cablee radii are in valid format</returns>
 		private bool CanExecute()
 		{
-			var cablesS = CablesDiameters.Split(' ');
+			var cablesS = CablesRadii.Split(' ');
 
 			// scale these small cables
 			cablesD = cablesS.Select(x => double.TryParse(x, NumberStyles.Any, CultureInfo.InvariantCulture, out var value) ?

@@ -33,8 +33,8 @@
             Grid.Row="0"
             Grid.Column="0"
             Margin="45,0,0,0"
-            HorizontalAlignment="Left"
-            Content="Cables diameters (mm):" />
+            HorizontalAlignment="Right"
+            Content="Cables radii (mm):" />
 
         <TextBox
             x:Name="cables"
@@ -43,7 +43,7 @@
             Width="auto"
             Margin="0,4"
             HorizontalAlignment="Left"
-            Text="{Binding CablesDiameters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding CablesRadii, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             TextWrapping="Wrap">
             <TextBox.InputBindings>
                 <KeyBinding

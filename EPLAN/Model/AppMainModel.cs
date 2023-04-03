@@ -21,7 +21,7 @@ namespace EPLAN.Model
 		/// <summary>
 		/// Inner cables in bundle represented as a text
 		/// </summary>
-		public string CablesDiameters { get; set; }
+		public string CablesRadii { get; set; }
 
 		/// <summary>
 		/// Bundle (bigest circle) of smaller circles (cables) inside the bundle
