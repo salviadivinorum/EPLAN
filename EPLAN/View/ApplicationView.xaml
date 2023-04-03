@@ -1,0 +1,118 @@
+﻿<Window
+    x:Class="EPLAN.View.ApplicationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dataViewModel="clr-namespace:EPLAN.ViewModel"
+    xmlns:local="clr-namespace:EPLAN.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="EPLAN Task"
+    Width="800"
+    Height="550"
+    d:DataContext="{d:DesignInstance Type=dataViewModel:AppMainVM,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <local:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+    </Window.Resources>
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="45,0,0,0"
+            HorizontalAlignment="Left"
+            Content="Cables diameters (mm):" />
+
+        <TextBox
+            x:Name="cables"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="auto"
+            Margin="0,4"
+            HorizontalAlignment="Left"
+            Text="{Binding CablesDiameters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="Wrap">
+            <TextBox.InputBindings>
+                <KeyBinding
+                    Key="Return"
+                    Command="{Binding Path=UpdateCommand}"
+                    CommandParameter="{Binding ElementName=cables}" />
+                <KeyBinding
+                    Key="Enter"
+                    Command="{Binding Path=UpdateCommand}"
+                    CommandParameter="{Binding ElementName=cables}" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="45,0,0,0"
+            HorizontalAlignment="Right"
+            Content="Scale (X times):" />
+
+        <TextBox
+            x:Name="scale"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="auto"
+            MinWidth="50"
+            Margin="0,4"
+            HorizontalAlignment="Left"
+            Text="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDoubleConverter}}"
+            TextWrapping="Wrap">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding Path=UpdateCommand}" />
+                <KeyBinding Key="Enter" Command="{Binding Path=UpdateCommand}" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <Button
+            x:Name="btnUpdate"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="100"
+            Height="20"
+            Margin="0,8,0,0"
+            HorizontalAlignment="Left"
+            Command="{Binding Path=UpdateCommand}"
+            Content="Update bundle" />
+
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="0,8,0,0"
+            HorizontalAlignment="Left"
+            Text="{Binding Status}" />
+
+        <Canvas
+            x:Name="myCanavs"
+            Grid.Row="4"
+            Grid.Column="0"
+            Width="1"
+            Height="1"
+            Margin="50,20,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <ItemsControl ItemsSource="{Binding Path=ItemsToShowInCanvas}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Canvas>
+    </Grid>
+</Window>
